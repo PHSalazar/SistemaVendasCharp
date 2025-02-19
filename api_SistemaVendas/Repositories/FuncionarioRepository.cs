@@ -1,4 +1,5 @@
 ﻿using api_SistemaVendas.Data;
+using api_SistemaVendas.Exceptions;
 using api_SistemaVendas.Models.Funcionario;
 
 namespace api_SistemaVendas.Repositories
@@ -22,7 +23,7 @@ namespace api_SistemaVendas.Repositories
             var funcionarioBD = _context.Funcionario.FirstOrDefault(f => f.Id == id);
 
             if (funcionarioBD == null)
-                throw new Exception($"Funcionário com o ID {id} não encontrado.");
+                throw new NotFoundException($"Funcionário com o ID {id} não encontrado.");
 
             return funcionarioBD;
         }
@@ -40,7 +41,7 @@ namespace api_SistemaVendas.Repositories
             var funcionarioBD = _context.Funcionario.FirstOrDefault(f => f.Id == id);
 
             if (funcionarioBD == null)
-                throw new Exception($"Funcionário com o ID {id} não encontrado e não pode ser removido.");
+                throw new NotFoundException($"Funcionário com o ID {id} não encontrado e não pode ser removido.");
 
             _context.Funcionario.Remove(funcionarioBD);
             await _context.SaveChangesAsync();

@@ -1,4 +1,5 @@
 using api_SistemaVendas.Data;
+using api_SistemaVendas.Middlewares;
 using api_SistemaVendas.Repositories;
 using api_SistemaVendas.Services;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
